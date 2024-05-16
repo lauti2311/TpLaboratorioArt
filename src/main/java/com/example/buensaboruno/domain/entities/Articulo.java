@@ -1,5 +1,7 @@
 package com.example.buensaboruno.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -34,6 +36,7 @@ public abstract class Articulo  extends Base {
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
     @NotAudited
+    @JsonManagedReference
     protected Set<ImagenArticulo> imagenes = new HashSet<>();
 
     @ManyToOne
@@ -41,6 +44,7 @@ public abstract class Articulo  extends Base {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
+    @JsonBackReference
     protected Categoria categoria;
 
 }

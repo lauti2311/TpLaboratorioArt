@@ -1,5 +1,6 @@
 package com.example.buensaboruno.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,6 +19,7 @@ public class ImagenArticulo extends Base{
 
     @ManyToOne
     @JoinColumn(name = "articulo_id")
+    @JsonBackReference
     private Articulo articulo;
 
 }

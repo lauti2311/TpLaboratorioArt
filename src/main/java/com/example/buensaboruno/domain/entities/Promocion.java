@@ -1,6 +1,7 @@
 package com.example.buensaboruno.domain.entities;
 
 import com.example.buensaboruno.domain.enums.TipoPromocion;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.NotAudited;
@@ -56,6 +57,7 @@ public class Promocion  extends Base{
     private Set<PromocionDetalle> promocionDetalles = new HashSet<>();
 
     @ManyToMany (mappedBy = "promociones")
+    @JsonBackReference
     private Set<Sucursal> sucursales = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)

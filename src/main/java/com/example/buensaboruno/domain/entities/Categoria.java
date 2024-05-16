@@ -1,5 +1,6 @@
 package com.example.buensaboruno.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -25,6 +26,7 @@ public class Categoria extends Base{
     @ManyToMany(mappedBy = "categorias")
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
+    @JsonManagedReference
     private Set<Sucursal> sucursales = new HashSet<>();
 
 //    @OneToMany
@@ -40,6 +42,7 @@ public class Categoria extends Base{
     //DE ESTA MANERA PONE EL FOREIGN KEY 'categoria_id' EN LA TABLA DE LOS MANY
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
+    @JsonManagedReference
     private Set<Articulo> articulos = new HashSet<>();
 
 
