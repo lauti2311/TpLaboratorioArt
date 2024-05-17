@@ -1,5 +1,6 @@
 package com.example.buensaboruno.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -26,6 +27,7 @@ public class ArticuloManufacturado  extends Articulo{
 
     @OneToMany( mappedBy = "articuloManufacturado",cascade = CascadeType.ALL)
     @Builder.Default
+    @JsonManagedReference
     private Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles = new HashSet<>();
 
 

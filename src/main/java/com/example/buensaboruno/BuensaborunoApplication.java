@@ -318,8 +318,9 @@ public class BuensaborunoApplication {
 			// Crear fotos para los artículos manufacturados
 			ImagenArticulo imagenArticuloPizzaMuzarella = ImagenArticulo.builder().
 					url("https://storage.googleapis.com/fitia-api-bucket/media/images/recipe_images/1002846.jpg").
+					articulo(pizzaMuzarella).
 					build();
-			ImagenArticulo imagenArticuloPizzaNapolitana = ImagenArticulo.builder().url("https://assets.elgourmet.com/wp-content/uploads/2023/03/8metlvp345_portada-pizza-1024x686.jpg.webp").build();
+			ImagenArticulo imagenArticuloPizzaNapolitana = ImagenArticulo.builder().url("https://assets.elgourmet.com/wp-content/uploads/2023/03/8metlvp345_portada-pizza-1024x686.jpg.webp").articulo(pizzaNapolitana).build();
 			imagenArticuloRepository.save(imagenArticuloPizzaMuzarella);
 			imagenArticuloRepository.save(imagenArticuloPizzaNapolitana);
 
@@ -333,8 +334,9 @@ public class BuensaborunoApplication {
 			ArticuloManufacturadoDetalle detalle1 = ArticuloManufacturadoDetalle.builder().
 					articuloInsumo(harina).
 					cantidad(300).
+					articuloManufacturado(pizzaMuzarella).
 					build();
-			ArticuloManufacturadoDetalle detalle2 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(600).build();
+			ArticuloManufacturadoDetalle detalle2 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(600).articuloManufacturado(pizzaMuzarella).build();
 			ArticuloManufacturadoDetalle detalle3 = ArticuloManufacturadoDetalle.builder().articuloInsumo(harina).cantidad(350).build();
 			ArticuloManufacturadoDetalle detalle4 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(650).build();
 			ArticuloManufacturadoDetalle detalle5 = ArticuloManufacturadoDetalle.builder().articuloInsumo(tomate).cantidad(2).build();
