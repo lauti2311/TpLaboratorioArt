@@ -3,6 +3,8 @@ package com.example.buensaboruno.domain.entities;
 import com.example.buensaboruno.domain.enums.Estado;
 import com.example.buensaboruno.domain.enums.FormaPago;
 import com.example.buensaboruno.domain.enums.TipoEnvio;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -32,27 +34,36 @@ public class Pedido extends Base{
     private LocalDate fechaPedido;
 
     @ManyToOne
+    @JsonBackReference
     private Domicilio domicilio;
 
     @ManyToOne
+    @JsonBackReference
     private Sucursal sucursal;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "factura_id", referencedColumnName = "id")
+    @JsonBackReference
     private Factura factura;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference
     private Cliente cliente;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     //SE AGREGA EL JOIN COLUMN PARA QUE JPA NO CREE LA TABLA INTERMEDIA EN UNA RELACION ONE TO MANY
     //DE ESTA MANERA PONE EL FOREIGN KEY 'pedido_id' EN LA TABLA DE LOS MANY
-    @JoinColumn(name = "pedido_id")
+    @JsonManagedReference(value = "detallePedidos")
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
     private Set<DetallePedido> detallePedidos = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "empleado_id")
+    @JsonBackReference
     private Empleado empleado;
+
+
+
 }

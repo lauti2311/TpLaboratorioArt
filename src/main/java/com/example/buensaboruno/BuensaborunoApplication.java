@@ -507,8 +507,12 @@ public class BuensaborunoApplication {
 			DetallePedido detallePedido1 = DetallePedido.builder().articulo(pizzaMuzarella).cantidad(1).subTotal(200.0).build();
 			DetallePedido detallePedido2 = DetallePedido.builder().articulo(cocaCola).cantidad(2).subTotal(100.0).build();
 
+			detallePedido1.setPedido(pedido); // Set the Pedido in the DetallePedido
+			detallePedido2.setPedido(pedido); // Set the Pedido in the DetallePedido
+
 			pedido.getDetallePedidos().add(detallePedido1);
 			pedido.getDetallePedidos().add(detallePedido2);
+
 			pedido.setCliente(cliente);
 			pedido.setEmpleado(empleado);
 			pedidoRepository.save(pedido);

@@ -1,6 +1,7 @@
 package com.example.buensaboruno.domain.entities;
 
 import com.example.buensaboruno.domain.enums.FormaPago;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -27,5 +28,9 @@ public class Factura extends Base{
     private FormaPago formaPago;
     private Double totalVenta;
 
+
+    @OneToOne(mappedBy = "factura")
+    @JsonBackReference
+    private Pedido pedido;
 
 }

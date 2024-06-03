@@ -1,6 +1,7 @@
     package com.example.buensaboruno.domain.entities;
 
     import com.example.buensaboruno.domain.enums.Rol;
+    import com.fasterxml.jackson.annotation.JsonManagedReference;
     import jakarta.persistence.*;
     import lombok.*;
     import org.hibernate.envers.Audited;
@@ -34,6 +35,7 @@
 
         @OneToMany(mappedBy = "empleado", cascade = CascadeType.REFRESH, orphanRemoval = true)
         @ToString.Exclude
+        @JsonManagedReference(value = "pedidos")
         @Builder.Default
         private Set<Pedido> pedidos= new HashSet<>();
 
