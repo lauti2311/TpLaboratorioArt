@@ -1,16 +1,18 @@
 package com.example.buensaboruno.domain.controllers;
 
-import com.example.buensaboruno.domain.entities.ArticuloManufacturado;
-import com.example.buensaboruno.domain.services.ArticuloManufacturadoServiceImpl;
+import com.example.buensaboruno.domain.entities.Articulo;
+
+import com.example.buensaboruno.domain.services.ArticuloServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/articulomanufacturados")
+@RequestMapping("/api/articulos")
 @CrossOrigin(origins = "http://localhost:5173")
-public class ArticuloManufacturadoController extends BaseControllerImpl<ArticuloManufacturado, ArticuloManufacturadoServiceImpl> {
+public class ArticuloController extends BaseControllerImpl<Articulo, ArticuloServiceImpl> {
+
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro){
         try{
@@ -19,11 +21,11 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \"" + e.getMessage() + "\"}"));
         }
     }
+
     @GetMapping("/searchPaged")
     public ResponseEntity<?> search(@RequestParam String filtro, Pageable pageable){
         try{
-            System.out.println("sas\n\n\n");
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.search(filtro));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.search(filtro, pageable));
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \"" + e.getMessage() + "\"}"));
         }

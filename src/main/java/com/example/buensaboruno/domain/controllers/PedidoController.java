@@ -5,13 +5,11 @@ import com.example.buensaboruno.domain.services.PedidoServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/pedido")
+@CrossOrigin(origins = "http://localhost:5173")
 public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceImpl> {
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro){
