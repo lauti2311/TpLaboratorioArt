@@ -2,14 +2,10 @@ package com.example.buensaboruno.domain.entities;
 
 import com.example.buensaboruno.domain.enums.FormaPago;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
-import org.hibernate.envers.Audited;
-
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -18,8 +14,7 @@ import java.util.List;
 @Getter
 @ToString
 @Builder
-//@Audited
-public class Factura extends Base{
+public class Factura extends Base {
     private LocalDate fechaFcturacion;
     private Integer mpPaymentId;
     private Integer mpMerchantOrderId;
@@ -28,9 +23,7 @@ public class Factura extends Base{
     private FormaPago formaPago;
     private Double totalVenta;
 
-
     @OneToOne(mappedBy = "factura")
-    @JsonBackReference
+    @JsonManagedReference(value = "pedido-factura")
     private Pedido pedido;
-
 }

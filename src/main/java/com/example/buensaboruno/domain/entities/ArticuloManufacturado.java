@@ -27,7 +27,7 @@ public class ArticuloManufacturado  extends Articulo{
 
     @OneToMany( mappedBy = "articuloManufacturado",cascade = CascadeType.ALL)
     @Builder.Default
-    @JsonManagedReference
+    @JsonManagedReference(value = "articuloManufacturadoDetalles")
     private Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles = new HashSet<>();
 
 

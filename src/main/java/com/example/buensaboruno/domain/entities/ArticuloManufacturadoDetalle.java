@@ -27,6 +27,6 @@ public class ArticuloManufacturadoDetalle extends Base{
     @ManyToOne
     @JoinColumn(name = "articulo_manufacturado_id")
     @ToString.Exclude
-    @JsonBackReference
+    @JsonBackReference(value = "articuloManufacturadoDetalles")
     private ArticuloManufacturado articuloManufacturado;
 }
