@@ -1,6 +1,8 @@
 package com.example.buensaboruno.domain.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -18,6 +20,7 @@ import java.util.Set;
 @ToString
 @Builder
 //@Audited
+
 public class Domicilio extends Base{
     private String calle;
     private Integer numero;
@@ -28,6 +31,12 @@ public class Domicilio extends Base{
     @ManyToOne
     @NotAudited
     private Localidad localidad;
+
+    @OneToMany(mappedBy = "domicilio",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "pedido-domicilio")
+    @Builder.Default
+    @NotAudited
+    private Set<Pedido> pedidos = new HashSet<>();
 
 
 }

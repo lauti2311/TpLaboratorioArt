@@ -57,7 +57,6 @@ public class Promocion  extends Base{
     private Set<PromocionDetalle> promocionDetalles = new HashSet<>();
 
     @ManyToMany (mappedBy = "promociones")
-    @JsonBackReference
     private Set<Sucursal> sucursales = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)

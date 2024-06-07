@@ -1,6 +1,7 @@
 package com.example.buensaboruno.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
@@ -37,7 +38,6 @@ public class Sucursal extends  Base{
     @JoinTable(name = "sucursal_promocion",
             joinColumns = @JoinColumn(name = "promocion_id"),
             inverseJoinColumns = @JoinColumn(name = "sucursal_id"))
-    @JsonManagedReference
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
     private Set<Promocion> promociones = new HashSet<>();
@@ -50,8 +50,7 @@ public class Sucursal extends  Base{
             joinColumns = @JoinColumn(name = "sucursal_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
-    @JsonBackReference
- @Builder.Default
+    @Builder.Default
     private Set<Categoria> categorias = new HashSet<>();
 
 
@@ -62,8 +61,14 @@ public class Sucursal extends  Base{
     private Set<Empleado> empleados = new HashSet<>();
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "empresa-sucursal")
     private Empresa empresa;
+
+    @OneToMany(mappedBy = "sucursal",cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @Builder.Default
+    @JsonManagedReference(value = "pedido-sucursal")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private Set<Pedido> pedidos = new HashSet<>();
 
 
 }
